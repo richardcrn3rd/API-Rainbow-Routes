@@ -24,17 +24,19 @@ app.get('/', function (req, res) {
 
 // Color Page
 app.get('/:color', function (req, res) {
-    let myColor = req.params.color
-    res.send(`
-        <body style="margin: 0;">
-            <div style="border: 1px solid black; height: 10vh; background-color: ${myColor};">
-                <h2 style="text-align: center;">NAV BAR</h2>
-            </div>
-            <h1 style="color: ${myColor};">${myColor.charAt(0).toUpperCase() + myColor.slice(1)} Page</h1>
-        </body>
-    `)
-})
+    let myColor = req.params.color;
+    if (typeof myColor === "string") {
+        res.send(`
+            <body style="margin: 0;">
+                <div style="border: 1px solid black; height: 10vh; background-color: ${myColor};">
+                    <h2 style="text-align: center;">NAV BAR</h2>
+                </div>
+                <h1 style="color: ${myColor};">${myColor.charAt(0).toUpperCase() + myColor.slice(1)} Page</h1>
+            </body>
+        `);
+    }        
+});
 
 
 // Listen to a port number defined by a local environment variable
-app.listen(process.env.PORT)
+app.listen(process.env.PORT);
